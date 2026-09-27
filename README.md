@@ -1,30 +1,66 @@
-# Pomodoro
+# Pomodoro App
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A sleek, dark-themed Pomodoro focus timer built with Next.js — alternate between 25-minute focus sessions and 5-minute breaks, track completed sessions, and switch between two timer display styles.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/dana-vercel-computing/v0-pomodoro-by-i-putu-dana-putra)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/RDMvzcXZFo4)
+## Features
 
-## Overview
+- **25/5 Pomodoro cycle** — classic 25-minute focus blocks with 5-minute breaks
+- **Start / pause / reset** controls with a live MM:SS countdown
+- **Session counter** — counts completed focus sessions
+- **Two display styles** — "modern" card and a retro flip-clock style, toggleable with one tap
+- **Animated progress bar** showing session completion
+- **Dark gradient UI** with Tailwind CSS + shadcn/ui components and Lucide icons
+- Fully client-side — no backend, no database, no login
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## Tech Stack
 
-## Deployment
+- **Framework:** Next.js 15 (App Router, statically exported)
+- **Language:** TypeScript
+- **UI:** React 19, Tailwind CSS 4, shadcn/ui (Radix primitives), Lucide icons
+- **Theming:** next-themes (dark mode)
 
-Your project is live at:
+## Quick Start
 
-**[https://vercel.com/dana-vercel-computing/v0-pomodoro-by-i-putu-dana-putra](https://vercel.com/dana-vercel-computing/v0-pomodoro-by-i-putu-dana-putra)**
+```bash
+npm install --legacy-peer-deps
+npm run dev
+```
 
-## Build your app
+Open http://localhost:3000 — the timer is ready to use.
 
-Continue building your app on:
+### Production build (static)
 
-**[https://v0.app/chat/projects/RDMvzcXZFo4](https://v0.app/chat/projects/RDMvzcXZFo4)**
+```bash
+npm run build   # outputs to ./out
+npx serve out   # preview the static export
+```
 
-## How It Works
+## Project Structure
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+```
+app/
+  page.tsx        # Timer UI: TimerDisplay, SessionCounter, controls
+  layout.tsx      # Root layout + theme provider
+  globals.css     # Tailwind styles
+components/
+  theme-provider.tsx
+lib/
+  utils.ts        # shadcn cn() helper
+public/           # Placeholder images
+next.config.mjs   # output: 'export' + basePath '/pomodoro-app'
+```
+
+## Environment Variables
+
+None required — the app is fully client-side.
+
+## Deployment Notes
+
+- The app is statically exported (`output: 'export'`) and deployed to GitHub Pages at `https://girishlade111.github.io/pomodoro-app/`.
+- `basePath: '/pomodoro-app'` is set so asset URLs resolve under the GitHub Pages subpath. **If you deploy to a root domain (e.g. Vercel), remove the `basePath` line.**
+- Security: Next.js was bumped from 15.2.4 to 15.2.8 (fixes CVE-2025-55182, CVE-2025-66478).
+- Note: this repo was originally generated with v0.app and syncs with v0 deployments; the README and static-export config were added on top.
+
+---
+
+Built by Girish Lade · https://ladestack.in
